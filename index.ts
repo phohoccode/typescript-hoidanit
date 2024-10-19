@@ -9,7 +9,6 @@ let _verify: boolean = true;
 
 // array
 let address: string[] = ["vinh long", "dong thap", "can tho"];
-// console.log(">>> address", address);
 
 // object
 let user4: {
@@ -24,15 +23,14 @@ let user4: {
   course: ["javascript, typescript, nodejs, reactjs, expressjs"],
 };
 
-// console.log(">>> user4", user4);
-
-// tuple: dataType/size/order
+// Tuple -> mảng cố định với số lượng phần tử
+// -> mỗi phần tử có kiểu dữ liệu xác định
 let tech: [string, number] = ["javascript", 2];
 
-// optional tuple
+// Optional tuple -> cho phép một số phần tử trong tuple có thể không bắt buộc
 let tech2: [number, string?] = [2, "typescript"];
 
-// enum
+// enum -> tập hợp các giá trị cố định
 enum API_STATUS {
   PENDDING = "PENDDING",
   FULFILLED = "FULFILLED",
@@ -40,27 +38,23 @@ enum API_STATUS {
 }
 
 let a1 = API_STATUS.PENDDING;
-// console.log(">>> a1", a1);
-// console.log(">>> API_STATUS:", API_STATUS.FULFILLED);
 
-// any
+// any -> không bị kiểm tra kiểu bởi typescript
 let check: any = "phohoccode";
 check = true;
 check = 2;
-// console.log(">>> check", check);
 
-// void
+// void -> một hàm không trả về giá trị
 const handleLogs = (message: string): void => {
   console.log(">>> message: ", message);
 };
 
-// never
-function handleException(errMgs: string): never {
-  throw Error(errMgs);
+// never -> một hàm hoặc biểu thức sẽ không bao giờ hoàn thành thành công.
+function throwError(message: string): never {
+  throw new Error(message);
 }
-// handleException("Error");
 
-// union
+// union -> cho phép một biến hoặc một tham số có thể mang nhiều kiểu dữ liệu khác nhau
 function addNumberOrString(a: number | string, b: number | string) {
   if (typeof a === "number" && typeof b === "number") {
     return a + b;
@@ -72,9 +66,7 @@ function addNumberOrString(a: number | string, b: number | string) {
   throw new Error("Tham số phải là số hoặc chuỗi");
 }
 
-// console.log(">>> check", addNumberOrString(2, 3));
-
-// aliases
+// aliases -> cho phép đặt tên cho một kiểu dữ liệu
 type phoType = number | string;
 
 function addNumberOrString2(a: phoType, b: phoType) {
@@ -88,92 +80,6 @@ function addNumberOrString2(a: phoType, b: phoType) {
   throw new Error("Tham số phải là số hoặc chuỗi");
 }
 
-// console.log(">>> check", addNumberOrString2(2, 3));
-
-// if else
-const age: number = 19;
-if (age > 18) {
-  //   console.log("Bạn đã đủ tuổi");
-} else {
-  //   console.log("Bạn chưa đủ tuổi");
-}
-
-// switch case
-let month: number = 3;
-switch (month) {
-  case 1:
-    console.log("Tháng 1");
-    break;
-  case 2:
-    console.log("Tháng 2");
-    break;
-  case 3:
-    console.log("Tháng 3");
-    break;
-  case 4:
-    console.log("Tháng 4");
-    break;
-  case 5:
-    console.log("Tháng 5");
-    break;
-  case 6:
-    console.log("Tháng 6");
-    break;
-  case 7:
-    console.log("Tháng 7");
-    break;
-  case 8:
-    console.log("Tháng 8");
-    break;
-  case 9:
-    console.log("Tháng 9");
-    break;
-  case 10:
-    console.log("Tháng 10");
-    break;
-  case 11:
-    console.log("Tháng 11");
-    break;
-  case 12:
-    console.log("Tháng 12");
-    break;
-  default:
-    break;
-}
-
-// for loop
-for (let i = 0; i < 10; i++) {
-  console.log(">>> i=", i);
-}
-
-// while loop
-let count1: number = 100;
-while (count1 >= 100) {
-  console.log(">>> count1", count1);
-  count1--;
-}
-
-// do while
-let n1: number = 0;
-do {
-  console.log(">>> n1", n1);
-  n1--;
-} while (n1 === 0);
-
-// break
-
-for (let i = 0; i < 100; i++) {
-  if (i > 10) {
-    console.log(">>> i > 10");
-    break;
-  }
-}
-
-// continue
-for (let i = 0; i < 100; i++) {
-  if (i % 2 == 1) continue;
-  console.log(i);
-}
 
 // function type
 function log(message: string) {
@@ -186,34 +92,42 @@ const log2 = (message: string) => {
 };
 log2("phohoccode");
 
-// Optional Parameters
-let sum4 = (x: number, y: number, z?: number) => {
+// Optional Parameters ->  cho phép khai báo một tham số có thể có hoặc không được truyền vào hàm
+let sum4 = (x: number, y: number, z?: number): number => {
   return x + y + (z ?? 0);
   //   return z ? x + y + z : x + y;
 };
 
-console.log(">>> sum4", sum4(1, 2));
-
-// default parammeters
-let sum5 = (a: number, b: number, z: number = 0) => {
+// Default parammeters -> cho phép chỉ định giá trị mặc định cho một tham số trong hàm
+let sum5 = (a: number, b: number, z: number = 0): number => {
   return a + b + z;
 };
-console.log(">>> sum5", sum5(1, 2));
 
-//  Rest Parameters
-let sum6 = (...numbers: number[]) => {
+//  Rest Parameters ->  cho phép truyền một số lượng không xác định các đối số
+// cho một hàm và gom chúng lại thành một mảng
+let sum6 = (...numbers: number[]): number => {
   let sum = 0;
   numbers.forEach((number) => (sum += number));
   return sum;
 };
-console.log(">>> sum6", sum6(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
 let multiply = (n: number, ...m: number[]) => {
   return m.map((x) => x * n);
 };
 
-let rs = multiply(10, 1, 2, 3, 4, 5);
-console.log(">>> rs", rs);
+// Interfaces -> xác định cấu trúc của đối tượng về kiểu của thuộc tính
+interface IPerson5 {
+  name: string;
+  age: number;
+  address: string;
+}
+
+function _person(person: IPerson5) {
+  (person.name = "phohoccode"),
+    (person.age = 20),
+    (person.address = "Vĩnh Long");
+}
+
 
 // Function Overloading
 function sum8(a: number, b: number): number;
@@ -221,9 +135,8 @@ function sum8(a: string, b: string): string;
 function sum8(a: any, b: any) {
   return a + b;
 }
-console.log(">>> sum8", sum8(5, 2), sum8("pho", "hoccode"));
 
-// classes
+// class
 class Person {
   name: string;
   age: number;
@@ -241,7 +154,7 @@ class Person {
 }
 
 const person = new Person("nhanquoc viet", 19, "hoà tân");
-console.log(">>> person", person.getUser());
+
 
 // Access Modifiers
 class Person2 {
@@ -261,7 +174,6 @@ class Person2 {
 }
 
 const person2 = new Person2("nhanquoc viet", 19, "hoà tân");
-console.log(">>> person", person.getUser());
 // person2.address = 'nhanquocviet' // lỗi do address private
 // person2.age = 19 // lỗi do age protected
 
@@ -303,9 +215,7 @@ class Person4 {
 }
 
 const person4 = new Person4("phohoccode", 20, "vinh long");
-console.log(">>> age", person4.getAge); // getter
 person4.setAge = 169;
-console.log(">>> age", person4.getAge); // getter
 
 // Inheritance
 class Animal {
@@ -339,8 +249,6 @@ class Cat extends Animal {
   }
 }
 const cat = new Cat("Meo meo", 2, 4);
-console.log(cat.getName());
-console.log(cat.describe());
 
 //  Static Methods and Properties
 class Circle {
@@ -350,8 +258,6 @@ class Circle {
     return this.pi;
   }
 }
-
-console.log(">>> pi", Circle.pi);
 
 // Abstract Classes
 abstract class Employee {
@@ -378,16 +284,4 @@ class FullTimeEmployee extends Employee {
   }
 }
 
-// Interfaces
-interface IPerson5 {
-  name: string;
-  age: number;
-  address: string;
-}
-
-function _person(person: IPerson5) {
-    person.name = 'phohoccode',
-    person.age = 20,
-    person.address = 'Vĩnh Long'
-}
 

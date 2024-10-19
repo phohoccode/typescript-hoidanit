@@ -21,7 +21,6 @@ var _address = "Việt nam";
 var _verify = true;
 // array
 var address = ["vinh long", "dong thap", "can tho"];
-// console.log(">>> address", address);
 // object
 var user4 = {
     name: "phohoccode",
@@ -29,12 +28,12 @@ var user4 = {
     address: "vietnam",
     course: ["javascript, typescript, nodejs, reactjs, expressjs"],
 };
-// console.log(">>> user4", user4);
-// tuple: dataType/size/order
+// Tuple -> mảng cố định với số lượng phần tử
+// -> mỗi phần tử có kiểu dữ liệu xác định
 var tech = ["javascript", 2];
-// optional tuple
+// Optional tuple -> cho phép một số phần tử trong tuple có thể không bắt buộc
 var tech2 = [2, "typescript"];
-// enum
+// enum -> tập hợp các giá trị cố định
 var API_STATUS;
 (function (API_STATUS) {
     API_STATUS["PENDDING"] = "PENDDING";
@@ -42,23 +41,19 @@ var API_STATUS;
     API_STATUS["REJECTED"] = "REJECTED";
 })(API_STATUS || (API_STATUS = {}));
 var a1 = API_STATUS.PENDDING;
-// console.log(">>> a1", a1);
-// console.log(">>> API_STATUS:", API_STATUS.FULFILLED);
-// any
+// any -> không bị kiểm tra kiểu bởi typescript
 var check = "phohoccode";
 check = true;
 check = 2;
-// console.log(">>> check", check);
-// void
+// void -> một hàm không trả về giá trị
 var handleLogs = function (message) {
     console.log(">>> message: ", message);
 };
-// never
-function handleException(errMgs) {
-    throw Error(errMgs);
+// never -> một hàm hoặc biểu thức sẽ không bao giờ hoàn thành thành công.
+function throwError(message) {
+    throw new Error(message);
 }
-// handleException("Error");
-// union
+// union -> cho phép một biến hoặc một tham số có thể mang nhiều kiểu dữ liệu khác nhau
 function addNumberOrString(a, b) {
     if (typeof a === "number" && typeof b === "number") {
         return a + b;
@@ -77,86 +72,6 @@ function addNumberOrString2(a, b) {
     }
     throw new Error("Tham số phải là số hoặc chuỗi");
 }
-// console.log(">>> check", addNumberOrString2(2, 3));
-// if else
-var age = 19;
-if (age > 18) {
-    //   console.log("Bạn đã đủ tuổi");
-}
-else {
-    //   console.log("Bạn chưa đủ tuổi");
-}
-// switch case
-var month = 3;
-switch (month) {
-    case 1:
-        console.log("Tháng 1");
-        break;
-    case 2:
-        console.log("Tháng 2");
-        break;
-    case 3:
-        console.log("Tháng 3");
-        break;
-    case 4:
-        console.log("Tháng 4");
-        break;
-    case 5:
-        console.log("Tháng 5");
-        break;
-    case 6:
-        console.log("Tháng 6");
-        break;
-    case 7:
-        console.log("Tháng 7");
-        break;
-    case 8:
-        console.log("Tháng 8");
-        break;
-    case 9:
-        console.log("Tháng 9");
-        break;
-    case 10:
-        console.log("Tháng 10");
-        break;
-    case 11:
-        console.log("Tháng 11");
-        break;
-    case 12:
-        console.log("Tháng 12");
-        break;
-    default:
-        break;
-}
-// for loop
-for (var i = 0; i < 10; i++) {
-    console.log(">>> i=", i);
-}
-// while loop
-var count1 = 100;
-while (count1 >= 100) {
-    console.log(">>> count1", count1);
-    count1--;
-}
-// do while
-var n1 = 0;
-do {
-    console.log(">>> n1", n1);
-    n1--;
-} while (n1 === 0);
-// break
-for (var i = 0; i < 100; i++) {
-    if (i > 10) {
-        console.log(">>> i > 10");
-        break;
-    }
-}
-// continue
-for (var i = 0; i < 100; i++) {
-    if (i % 2 == 1)
-        continue;
-    console.log(i);
-}
 // function type
 function log(message) {
     console.log(message);
@@ -166,19 +81,18 @@ var log2 = function (message) {
     console.log(message);
 };
 log2("phohoccode");
-// Optional Parameters
+// Optional Parameters ->  cho phép khai báo một tham số có thể có hoặc không được truyền vào hàm
 var sum4 = function (x, y, z) {
     return x + y + (z !== null && z !== void 0 ? z : 0);
     //   return z ? x + y + z : x + y;
 };
-console.log(">>> sum4", sum4(1, 2));
-// default parammeters
+// Default parammeters -> cho phép chỉ định giá trị mặc định cho một tham số trong hàm
 var sum5 = function (a, b, z) {
     if (z === void 0) { z = 0; }
     return a + b + z;
 };
-console.log(">>> sum5", sum5(1, 2));
-//  Rest Parameters
+//  Rest Parameters ->  cho phép truyền một số lượng không xác định các đối số
+// cho một hàm và gom chúng lại thành một mảng
 var sum6 = function () {
     var numbers = [];
     for (var _i = 0; _i < arguments.length; _i++) {
@@ -188,7 +102,6 @@ var sum6 = function () {
     numbers.forEach(function (number) { return (sum += number); });
     return sum;
 };
-console.log(">>> sum6", sum6(1, 2, 3, 4, 5, 6, 7, 8, 9));
 var multiply = function (n) {
     var m = [];
     for (var _i = 1; _i < arguments.length; _i++) {
@@ -196,13 +109,15 @@ var multiply = function (n) {
     }
     return m.map(function (x) { return x * n; });
 };
-var rs = multiply(10, 1, 2, 3, 4, 5);
-console.log(">>> rs", rs);
+function _person(person) {
+    (person.name = "phohoccode"),
+        (person.age = 20),
+        (person.address = "Vĩnh Long");
+}
 function sum8(a, b) {
     return a + b;
 }
-console.log(">>> sum8", sum8(5, 2), sum8("pho", "hoccode"));
-// classes
+// class
 var Person = /** @class */ (function () {
     function Person(name, age, address) {
         this.name = name;
@@ -215,7 +130,6 @@ var Person = /** @class */ (function () {
     return Person;
 }());
 var person = new Person("nhanquoc viet", 19, "hoà tân");
-console.log(">>> person", person.getUser());
 // Access Modifiers
 var Person2 = /** @class */ (function () {
     function Person2(name, age, address) {
@@ -229,7 +143,6 @@ var Person2 = /** @class */ (function () {
     return Person2;
 }());
 var person2 = new Person2("nhanquoc viet", 19, "hoà tân");
-console.log(">>> person", person.getUser());
 // person2.address = 'nhanquocviet' // lỗi do address private
 // person2.age = 19 // lỗi do age protected
 // readonly
@@ -269,9 +182,7 @@ var Person4 = /** @class */ (function () {
     return Person4;
 }());
 var person4 = new Person4("phohoccode", 20, "vinh long");
-console.log(">>> age", person4.getAge); // getter
 person4.setAge = 169;
-console.log(">>> age", person4.getAge); // getter
 // Inheritance
 var Animal = /** @class */ (function () {
     function Animal(name, age) {
@@ -299,8 +210,6 @@ var Cat = /** @class */ (function (_super) {
     return Cat;
 }(Animal));
 var cat = new Cat("Meo meo", 2, 4);
-console.log(cat.getName());
-console.log(cat.describe());
 //  Static Methods and Properties
 var Circle = /** @class */ (function () {
     function Circle() {
@@ -311,7 +220,6 @@ var Circle = /** @class */ (function () {
     Circle.pi = 3.14;
     return Circle;
 }());
-console.log(">>> pi", Circle.pi);
 // Abstract Classes
 var Employee = /** @class */ (function () {
     function Employee(firstName, lastName) {
@@ -342,8 +250,3 @@ var FullTimeEmployee = /** @class */ (function (_super) {
     };
     return FullTimeEmployee;
 }(Employee));
-function _person(person) {
-    person.name = 'phohoccode',
-        person.age = 20,
-        person.address = 'Vĩnh Long';
-}
